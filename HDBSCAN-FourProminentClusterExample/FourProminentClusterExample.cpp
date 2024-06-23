@@ -49,28 +49,23 @@ int main(int argc, char **argv)
 
    std::vector<int> colors{kRed, kBlue, kGreen, kCyan};
 
-   std::map<int, int> labelToColor;
    for (auto &[label, graph] : graphsByLabel) {
+      graph->SetMarkerStyle(20); // Just an example style
       if (label == -1) {
-         labelToColor[label] = kBlack; // Noise is black
+         graph->SetMarkerColor(kBlack); // Noise is black
          continue;
       }
-      labelToColor[label] = colors.back();
-      cout << "Setting color for: " << label << " to " << colors.back() << endl;
+      graph->SetMarkerColor(colors.back());
       colors.pop_back();
-   }
-
-   for (auto &[label, graph] : graphsByLabel) {
-      graph->SetMarkerColor(labelToColor[label]);
-      graph->SetMarkerStyle(20); // Just an example style
    }
 
    // Draw the graph
    TCanvas *canvas = new TCanvas("canvas", "Four Prominent Clusters", 800, 600);
-   canvas->DrawFrame(-10, -10, 10, 10);
+   canvas->DrawFrame(-10, -10, 10, 10); // Set bounds of the frame
+
    for (auto &[label, graph] : graphsByLabel) {
       graph->Draw("P same");
-      cout << "Label " << label << " has " << graph->GetN() << " points" << " and color " << labelToColor[label]
+      cout << "Label " << label << " has " << graph->GetN() << " points" << " and color " << graph->GetMarkerColor()
            << endl;
    }
 
