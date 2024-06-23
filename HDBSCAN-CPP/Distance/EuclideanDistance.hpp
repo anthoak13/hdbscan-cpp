@@ -1,12 +1,13 @@
-#pragma once
-#include"IDistanceCalculator.hpp"
+#ifndef EUCLIDEANDISTANCE_HPP
+#define EUCLIDEANDISTANCE_HPP
+
+#include "IDistanceCalculator.hpp"
 /// <summary>
 /// Computes the euclidean distance between two points, d = sqrt((x1-y1)^2 + (x2-y2)^2 + ... + (xn-yn)^2).
 /// </summary>
-class EuclideanDistance : IDistanceCalculator
-{
+class EuclideanDistance : IDistanceCalculator {
 public:
-	double computeDistance(std::vector<double> attributesOne, std::vector<double> attributesTwo);
-
+   double computeDistance(std::vector<double> attributesOne, std::vector<double> attributesTwo);
 };
 
+#endif

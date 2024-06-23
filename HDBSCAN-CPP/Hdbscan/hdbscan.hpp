@@ -1,56 +1,49 @@
-#pragma once
-#include<string>
-#include<vector>
-#include"../Runner/hdbscanRunner.hpp"
-#include"../Runner/hdbscanParameters.hpp"
-#include"../Runner/hdbscanResult.hpp"
-#include"../HdbscanStar/outlierScore.hpp"
+#ifndef HDBSCAN_HPP
+#define HDBSCAN_HPP
+
+#include <string>
+#include <vector>
+
+#include "../HdbscanStar/outlierScore.hpp"
+#include "../Runner/hdbscanParameters.hpp"
+#include "../Runner/hdbscanResult.hpp"
+#include "../Runner/hdbscanRunner.hpp"
 
 using namespace std;
-
 
 class Hdbscan
 
 {
 
 private:
+   string fileName;
 
-	string fileName;
-
-	hdbscanResult result;
+   hdbscanResult result;
 
 public:
+   vector<vector<double>> dataset;
 
-	vector < vector <double > > dataset;
+   std::vector<int> labels_;
 
-	std::vector<int> labels_;
+   std::vector<int> normalizedLabels_;
 
-	std::vector<int> normalizedLabels_;
+   std::vector<outlierScore> outlierScores_;
 
-	std::vector<outlierScore>outlierScores_;
+   std::vector<double> membershipProbabilities_;
 
-	std::vector <double> membershipProbabilities_;
+   uint32_t noisyPoints_;
 
-	uint32_t noisyPoints_;
+   uint32_t numClusters_;
 
-	uint32_t numClusters_;
+   Hdbscan(string readFileName) { fileName = readFileName; }
 
+   string getFileName();
 
+   int loadCsv(int numberOfValues, bool skipHeader = false);
 
-	Hdbscan(string readFileName) {
+   void execute(int minPoints, int minClusterSize, string distanceMetric);
 
-		fileName = readFileName;
-
-	}
-
-	string getFileName();
-			   
-	int loadCsv(int numberOfValues, bool skipHeader=false);
-
-	void execute(int minPoints, int minClusterSize, string distanceMetric);
-
-	void displayResult();
-
-
+   void displayResult();
 };
 
+#endif
