@@ -19,7 +19,7 @@ string Hdbscan::getFileName()
 /// <param name="skipHeader">Bool value to skip header or not</param>
 /// <returns>1 if successful, 0 otherwise</returns>
 
-int Hdbscan::loadCsv(int numberOfValues, bool skipHeader)
+int Hdbscan::loadCsv(int numberOfValues, bool skipHeader, char delim)
 {
    string attribute;
 
@@ -39,7 +39,7 @@ int Hdbscan::loadCsv(int numberOfValues, bool skipHeader)
       stringstream s(line);
       vector<double> row;
       currentAttributes = numberOfValues;
-      while (getline(s, attribute, ',') && currentAttributes != 0) {
+      while (getline(s, attribute, delim) && currentAttributes != 0) {
          row.push_back(stod(attribute));
          currentAttributes--;
       }

@@ -22,3 +22,6 @@ add_subdirectory(HDBSCAN-CPP)
 
 add_executable(HDBTest HDBSCAN-FourProminentClusterExample/FourProminentClusterExample.cpp) 
 target_link_libraries(HDBTest HDBSCAN)
+
+add_executable(EventTest ClusterEvent.cpp) 
+target_link_libraries(EventTest HDBSCAN)

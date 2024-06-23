@@ -39,7 +39,7 @@ public:
 
    string getFileName();
 
-   int loadCsv(int numberOfValues, bool skipHeader = false);
+   int loadCsv(int numberOfValues, bool skipHeader = false, char delim = ',');
 
    void execute(int minPoints, int minClusterSize, string distanceMetric);
 
